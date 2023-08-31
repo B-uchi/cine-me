@@ -65,7 +65,6 @@ const Today = () => {
   }, [selected]);
   return (
     <div className="today flex relative space-x-20">
-      {showPopup ? <Details id={selected.id} closePopup={closePopup}/> : ""}
       {loading ? (
         ""
       ) : selected ? (
@@ -104,6 +103,7 @@ const Today = () => {
               </button>
             </div>
           </div>
+          {showPopup ? <Details id={selected.id} closePopup={closePopup}/> : ""}
         </div>
       ) : (
         ""

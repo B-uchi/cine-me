@@ -77,7 +77,7 @@ const Details = (props) => {
     hasFetch ? "" : fetchMovieDetails();
   }
   return (
-    <div className="fixed left-3 right-3 top-5 z-30 mx-auto h-[95vh] overflow-y-scroll rounded-md border-primary-color bg-hover-color lg:top-5 lg:w-[90%] lg:border-[3px]">
+    <div className="fixed left-3 sm:w-full right-3 top-5 z-30 sm:mx-auto h-[95vh] overflow-y-scroll rounded-md border-primary-color bg-hover-color lg:top-5 lg:w-[90%] lg:border-[3px]">
       <div className="absolute left-0 z-20 flex w-full justify-end p-4">
         <button onClick={() => props.closePopup()}>
           <IoIosCloseCircle
@@ -111,18 +111,18 @@ const Details = (props) => {
           <img
             src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`}
             alt=""
-            className="opacity-20 relative w-full h-full sm:object-cover"
+            className="opacity-20 relative w-full h-fit sm:object-cover"
           />
-          <div className="absolute top-10 left-0 w-full h-full">
-            <div className="flex justify-center -space-x-24 items-center">
+          <div className="absolute top-10 left-0 right-0 w-full h-full">
+            <div className="flex flex-col items-center justify-center sm:flex-row w-full sm:-space-x-24 space-y-3 ">
               <div className="">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
                   alt=""
-                  className="w-2/3 border-black border-4"
+                  className="w-2/3 mx-auto border-black border-4"
                 />
               </div>
-              <div className="details flex p-5 rounded bg-primary-color flex-col w-[600px] pt-5">
+              <div className="details flex p-5 rounded bg-primary-color flex-col sm:w-[600px] w-[100%] pt-5">
                 <h2 className="text-3xl flex items-center text-text-color font-bold">
                   <a className="underline" target="_blank" href={movieDetails.homepage}>
                     {movieDetails.original_title} (
@@ -136,12 +136,12 @@ const Details = (props) => {
                 <small className="text-accent-color">
                   Release Date: {movieDetails.release_date}
                 </small>
-                <div className="flex space-x-3 mt-1">
+                <div className="flex space-x-3 overflow-x-auto mt-1">
                   {movieDetails.genres &&
                     movieDetails.genres.map((genre) => (
                       <div
                         key={genre.id}
-                        className="px-3 bg-text-color rounded-full border-hover-color border-spacing-9 border-2"
+                        className="px-3 bg-text-color rounded-full border-hover-color border-spacing-9  border-2"
                       >
                         {genre.name}
                       </div>
@@ -153,7 +153,7 @@ const Details = (props) => {
                 </p>
               </div>
             </div>
-            <div className="mt-14 p-10">
+            <div className="mt-5 p-3 sm:mt-14 sm:p-10">
               <h2
                 className="font-bold text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
@@ -176,7 +176,7 @@ const Details = (props) => {
                 )}
               </div>
             </div>
-            <div className="mt-2 p-10">
+            <div className="mt-5 p-3 sm:mt-2 sm:p-10">
               <h2
                 className="font-bold text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
