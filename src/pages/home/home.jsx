@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Today from "../../components/Today/Today";
 import axios from "axios";
 import MovieItem from "../../components/movieItem";
+import Details from "../../components/details/Details";
 let API_KEY = import.meta.env.VITE_API_KEY;
 
 const Home = () => {
@@ -12,7 +13,18 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [isLoaded, setisLoaded] = useState(false);
   const [retry, setRetry] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
+  const openPopup = (id) => {
+    window.idd = id
+    setShowPopup(true);
+  };
+  
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  
   useEffect(() => {
     const popularMoviesRequest = {
       method: "GET",
@@ -54,10 +66,14 @@ const Home = () => {
     const getTopRatedMovies = axios.request(topRatedRequest);
     const getupcomingMovies = axios.request(upcomingMoviesRequest);
     const getpopularTv = axios.request(popularTvRequest);
-    
 
     axios
-      .all([getPopularMovies, getTopRatedMovies, getupcomingMovies, getpopularTv])
+      .all([
+        getPopularMovies,
+        getTopRatedMovies,
+        getupcomingMovies,
+        getpopularTv,
+      ])
       .then(
         axios.spread((...result) => {
           setPopularMovies(result[0].data.results);
@@ -100,7 +116,7 @@ const Home = () => {
       ) : (
         <div className="">
           <Today movies={popularMovies} />
-
+          {showPopup ? <Details id={idd} closePopup={closePopup} /> : ""}
           {/* POPULAR MOVIES */}
           <section className="mt-1 sm:mt-5 p-5">
             <h2
@@ -111,9 +127,13 @@ const Home = () => {
             </h2>
             <div className="flex mt-5 overflow-x-auto">
               {popularMovies &&
-                popularMovies
-                  .slice(0, 10)
-                  .map((movie) => <MovieItem key={movie.id} movie={movie} />)}
+                popularMovies.slice(0, 10).map((movie) => (
+                    <MovieItem
+                      key={movie.id}
+                      movie={movie}
+                      openPopup={openPopup}
+                    />
+                ))}
             </div>
           </section>
 
@@ -129,7 +149,7 @@ const Home = () => {
               {topRatedMovies &&
                 topRatedMovies
                   .slice(0, 10)
-                  .map((movie) => <MovieItem key={movie.id} movie={movie} />)}
+                  .map((movie) => <MovieItem key={movie.id} movie={movie} openPopup={openPopup}/>)}
             </div>
           </section>
 
@@ -145,7 +165,7 @@ const Home = () => {
               {upcomingMovies &&
                 upcomingMovies
                   .slice(0, 10)
-                  .map((movie) => <MovieItem key={movie.id} movie={movie} />)}
+                  .map((movie) => <MovieItem key={movie.id} movie={movie} openPopup={openPopup}/>)}
             </div>
           </section>
 
@@ -161,9 +181,8 @@ const Home = () => {
               {popularTv &&
                 popularTv
                   .slice(0, 10)
-                  .map((movie) => <MovieItem key={movie.id} movie={movie} />)}
+                  .map((movie) => <MovieItem key={movie.id} movie={movie} openPopup={openPopup}/>)}
             </div>
-            {console.log(popularTv)}
           </section>
         </div>
       )}
