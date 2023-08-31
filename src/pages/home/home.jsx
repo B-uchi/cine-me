@@ -102,7 +102,7 @@ const Home = () => {
           <Today movies={popularMovies} />
 
           {/* POPULAR MOVIES */}
-          <section className="mt-5 p-5">
+          <section className="mt-1 sm:mt-5 p-5">
             <h2
               className="font-bold text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"

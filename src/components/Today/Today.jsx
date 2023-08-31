@@ -69,9 +69,9 @@ const Today = () => {
       {loading ? (
         ""
       ) : selected ? (
-        <div className="today flex ">
-          <img src={`https://image.tmdb.org/t/p/original${selected.backdrop_path}`} alt="" className="relative w-full sm:object-cover h-[92vh]"/>
-          <div className="details flex absolute bottom-10 left-10 p-5 rounded bg-primary-color flex-col w-[600px] pt-20">
+        <div className="today">
+          <img src={`https://image.tmdb.org/t/p/original${selected.backdrop_path}`} alt="" className="relative w-full sm:object-cover h-fit sm:h-[92vh] "/>
+          <div className="details relative flex p-5 rounded bg-primary-color flex-col sm:w-[600px]  pt-34sm:pt-20 overlayy sm:bottom-10 sm:absolute sm:left-10">
             <h2 className="text-3xl flex items-center text-text-color font-bold">
               {selected.original_title} ({selected.release_date.slice(0, 4)})
               <small className="text-accent-color text-sm ml-2">
@@ -82,12 +82,12 @@ const Today = () => {
             <small className="text-accent-color">
               Release Date: {selected.release_date}
             </small>
-            <div className="flex space-x-3 mt-1">
+            <div className=" overflow-auto flex space-x-3 mt-1">
               {details.genres &&
                 details.genres.map((genre) => (
                   <div
                     key={genre.id}
-                    className="px-3 bg-text-color rounded-full border-hover-color border-spacing-9 border-2"
+                    className="px-3 bg-text-color  rounded-full border-hover-color border-spacing-9 border-2"
                   >
                     {genre.name}
                   </div>
