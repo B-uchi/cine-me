@@ -114,7 +114,7 @@ const Details = (props) => {
             className="opacity-20 relative w-full h-fit sm:object-cover"
           />
           <div className="absolute top-10 left-0 right-0 w-full h-full">
-            <div className="flex flex-col items-center justify-center sm:flex-row w-full sm:-space-x-24 space-y-3 ">
+            <div className="flex flex-col items-center justify-center sm:flex-row w-full sm:space-x-24 space-y-3 ">
               <div className="">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
@@ -123,7 +123,7 @@ const Details = (props) => {
                 />
               </div>
               <div className="details flex p-5 rounded bg-primary-color flex-col sm:w-[600px] w-[100%] pt-5">
-                <h2 className="text-3xl flex items-center text-text-color font-bold">
+                <h2 className="text-xl sm:text-3xl flex items-center text-text-color font-bold">
                   <a className="underline" target="_blank" href={movieDetails.homepage}>
                     {movieDetails.original_title} (
                     {movieDetails.release_date.slice(0, 4)})
@@ -136,12 +136,12 @@ const Details = (props) => {
                 <small className="text-accent-color">
                   Release Date: {movieDetails.release_date}
                 </small>
-                <div className="flex space-x-3 overflow-x-auto mt-1">
+                <div className="flex space-x-1 sm:space-x-3 overflow-x-auto mt-1">
                   {movieDetails.genres &&
                     movieDetails.genres.map((genre) => (
                       <div
                         key={genre.id}
-                        className="px-3 bg-text-color rounded-full border-hover-color border-spacing-9  border-2"
+                        className="px-3 bg-text-color rounded-full border-hover-color text-[12px] sm:text-xl border-2"
                       >
                         {genre.name}
                       </div>
@@ -153,9 +153,9 @@ const Details = (props) => {
                 </p>
               </div>
             </div>
-            <div className="mt-5 p-3 sm:mt-14 sm:p-10">
+            <div className="mt-2 p-3 sm:mt-14 sm:p-10">
               <h2
-                className="font-bold text-2xl bg-primary-color w-fit
+                className="font-bold text-sm sm:text-xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
               >
                 Movie Shots:
@@ -176,14 +176,14 @@ const Details = (props) => {
                 )}
               </div>
             </div>
-            <div className="mt-5 p-3 sm:mt-2 sm:p-10">
+            <div className="mt-2 p-3 sm:mt-2 sm:p-10">
               <h2
-                className="font-bold text-2xl bg-primary-color w-fit
+                className="font-bold text-sm sm:text-xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
               >
                 You Might Also Like:{" "}
               </h2>
-              <div className="flex mt-6 space-x-7 overflow-x-auto">
+              <div className="flex mt-4 space-x-7 overflow-x-auto">
                 {movieRecommendations &&
                   movieRecommendations.map((movie) => (
                     <MovieItem

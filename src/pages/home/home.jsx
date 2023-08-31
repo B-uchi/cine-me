@@ -104,7 +104,7 @@ const Home = () => {
           {/* POPULAR MOVIES */}
           <section className="mt-1 sm:mt-5 p-5">
             <h2
-              className="font-bold text-2xl bg-primary-color w-fit
+              className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
             >
               Popular Movies
@@ -118,9 +118,9 @@ const Home = () => {
           </section>
 
           {/* TOP RATED MOVIES */}
-          <section className="mt-5 p-5">
+          <section className="mt-1 sm:mt-5 p-5">
             <h2
-              className="font-bold text-2xl bg-primary-color w-fit
+              className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
             >
               Top Rated Movies
@@ -134,9 +134,9 @@ const Home = () => {
           </section>
 
           {/* UPCOMING MOVIES */}
-          <section className="mt-5 p-5">
+          <section className="mt-1 sm:mt-5 p-5">
             <h2
-              className="font-bold text-2xl bg-primary-color w-fit
+              className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
             >
               Upcoming Movies
@@ -150,9 +150,9 @@ const Home = () => {
           </section>
 
           {/* TV SHOWS */}
-          <section className="mt-5 p-5">
+          <section className="mt-1 sm:mt-5 p-5">
             <h2
-              className="font-bold text-2xl bg-primary-color w-fit
+              className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
             >
               TV Shows

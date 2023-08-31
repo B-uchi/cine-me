@@ -71,7 +71,7 @@ const Today = () => {
         <div className="today">
           <img src={`https://image.tmdb.org/t/p/original${selected.backdrop_path}`} alt="" className="relative w-full sm:object-cover h-fit sm:h-[92vh] "/>
           <div className="details relative flex p-5 rounded bg-primary-color flex-col sm:w-[600px]  pt-34sm:pt-20 overlayy sm:bottom-10 sm:absolute sm:left-10">
-            <h2 className="text-3xl flex items-center text-text-color font-bold">
+            <h2 className="sm:text-3xl text-xl flex items-center text-text-color font-bold">
               {selected.original_title} ({selected.release_date.slice(0, 4)})
               <small className="text-accent-color text-sm ml-2">
                 <AiFillStar className="inline-block" />
@@ -81,12 +81,12 @@ const Today = () => {
             <small className="text-accent-color">
               Release Date: {selected.release_date}
             </small>
-            <div className=" overflow-auto flex space-x-3 mt-1">
+            <div className=" overflow-auto flex space-x-1 sm:space-x-3 mt-1">
               {details.genres &&
                 details.genres.map((genre) => (
                   <div
                     key={genre.id}
-                    className="px-3 bg-text-color  rounded-full border-hover-color border-spacing-9 border-2"
+                    className="px-3 bg-text-color  rounded-full border-hover-color text-[12px] sm:text-xl border-2"
                   >
                     {genre.name}
                   </div>
@@ -96,7 +96,7 @@ const Today = () => {
             <p className="text-text-color line-clamp-2 overflow-ellipsis text-sm">{selected.overview}</p>
             <div className="mt-3">
               <button
-                className="bg-secondary-color font-bold text-xl p-3 rounded-full hover:scale-105 transition-all"
+                className="bg-secondary-color font-bold text-lg p-2 rounded-lg hover:scale-105 transition-all"
                 onClick={openPopup}
               >
                 Show More
