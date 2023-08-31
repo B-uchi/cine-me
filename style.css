@@ -46,6 +46,8 @@ body {
   .today > img {
     height: fit-content;
   }
+  .item-img{
+  }
   .nav-ul {
     display: none;
   }
