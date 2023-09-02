@@ -114,7 +114,7 @@ const Home = () => {
               </div>
             </div>
           ) : (
-            <img src={spinner} alt="" />
+            <img src={spinner} className="w-[200px]" alt="" />
           )}
         </div>
       ) : (

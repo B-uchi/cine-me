@@ -112,7 +112,7 @@ const Details = (props) => {
               </div>
             </div>
           ) : (
-            <img className="mx-auto my-56" src={spinner} alt="" />
+            <img className="mx-auto my-56 w-[200px]" src={spinner} alt="" />
           )
         ) : (
           <div className="">
