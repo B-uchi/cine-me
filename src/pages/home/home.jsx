@@ -107,7 +107,7 @@ const Home = () => {
                 <button
                   className="bg-secondary-color font-bold p-3 px-5 rounded-lg"
                   onClick={() => {
-                    setRetry(!retry);
+                    setRetry(!retry); setisLoaded(false)
                   }}
                 >
                   Retry
