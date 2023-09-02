@@ -4,6 +4,7 @@ import axios from "axios";
 import MovieItem from "../../components/movieItem";
 import Details from "../../components/details/Details";
 let API_KEY = import.meta.env.VITE_API_KEY;
+import { motion, AnimatePresence } from "framer-motion";
 import spinner from "../../assets/spinner.gif";
 
 const Home = () => {
@@ -118,101 +119,107 @@ const Home = () => {
           )}
         </div>
       ) : (
-        <div className="">
-          <Today movies={popularMovies} />
-          {showPopup ? <Details id={idd} closePopup={closePopup} /> : ""}
-          {/* POPULAR MOVIES */}
-          <section className="mt-1 sm:mt-5 p-5">
-            <h2
-              className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
+        <AnimatePresence mode="wait">
+          <motion.div key="emptye"
+        initial={{ scale:0.3, opacity: 0 }}
+        animate={{ scale:1, opacity: 1 }}
+        exit={{ x: -1000, opacity: 1}}
+        transition={{ duration: 0.5}}  className="">
+            <Today movies={popularMovies} />
+            {showPopup ? <Details id={idd} closePopup={closePopup} /> : ""}
+            {/* POPULAR MOVIES */}
+            <section className="mt-1 sm:mt-5 p-5">
+              <h2
+                className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
-            >
-              Popular Movies
-            </h2>
-            <div className="flex mt-5 overflow-x-auto">
-              {popularMovies &&
-                popularMovies
-                  .slice(0, 10)
-                  .map((movie) => (
-                    <MovieItem
-                      key={movie.id}
-                      movie={movie}
-                      openPopup={openPopup}
-                      fetchMovieDetails={fetchMovieDetails}
-                    />
-                  ))}
-            </div>
-          </section>
+              >
+                Popular Movies
+              </h2>
+              <div className="flex mt-5 overflow-x-auto">
+                {popularMovies &&
+                  popularMovies
+                    .slice(0, 10)
+                    .map((movie) => (
+                      <MovieItem
+                        key={movie.id}
+                        movie={movie}
+                        openPopup={openPopup}
+                        fetchMovieDetails={fetchMovieDetails}
+                      />
+                    ))}
+              </div>
+            </section>
 
-          {/* TOP RATED MOVIES */}
-          <section className="mt-1 sm:mt-5 p-5">
-            <h2
-              className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
+            {/* TOP RATED MOVIES */}
+            <section className="mt-1 sm:mt-5 p-5">
+              <h2
+                className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
-            >
-              Top Rated Movies
-            </h2>
-            <div className="flex mt-5 overflow-x-auto">
-              {topRatedMovies &&
-                topRatedMovies
-                  .slice(0, 10)
-                  .map((movie) => (
-                    <MovieItem
-                      fetchMovieDetails={fetchMovieDetails}
-                      key={movie.id}
-                      movie={movie}
-                      openPopup={openPopup}
-                    />
-                  ))}
-            </div>
-          </section>
+              >
+                Top Rated Movies
+              </h2>
+              <div className="flex mt-5 overflow-x-auto">
+                {topRatedMovies &&
+                  topRatedMovies
+                    .slice(0, 10)
+                    .map((movie) => (
+                      <MovieItem
+                        fetchMovieDetails={fetchMovieDetails}
+                        key={movie.id}
+                        movie={movie}
+                        openPopup={openPopup}
+                      />
+                    ))}
+              </div>
+            </section>
 
-          {/* UPCOMING MOVIES */}
-          <section className="mt-1 sm:mt-5 p-5">
-            <h2
-              className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
+            {/* UPCOMING MOVIES */}
+            <section className="mt-1 sm:mt-5 p-5">
+              <h2
+                className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
-            >
-              Upcoming Movies
-            </h2>
-            <div className="flex mt-5 overflow-x-auto">
-              {upcomingMovies &&
-                upcomingMovies
-                  .slice(0, 10)
-                  .map((movie) => (
-                    <MovieItem
-                      fetchMovieDetails={fetchMovieDetails}
-                      key={movie.id}
-                      movie={movie}
-                      openPopup={openPopup}
-                    />
-                  ))}
-            </div>
-          </section>
+              >
+                Upcoming Movies
+              </h2>
+              <div className="flex mt-5 overflow-x-auto">
+                {upcomingMovies &&
+                  upcomingMovies
+                    .slice(0, 10)
+                    .map((movie) => (
+                      <MovieItem
+                        fetchMovieDetails={fetchMovieDetails}
+                        key={movie.id}
+                        movie={movie}
+                        openPopup={openPopup}
+                      />
+                    ))}
+              </div>
+            </section>
 
-          {/* TV SHOWS */}
-          <section className="mt-1 sm:mt-5 p-5">
-            <h2
-              className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
+            {/* TV SHOWS */}
+            <section className="mt-1 sm:mt-5 p-5">
+              <h2
+                className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
                 p-3 text-text-color rounded"
-            >
-              TV Shows
-            </h2>
-            <div className="flex mt-5 overflow-x-auto">
-              {popularTv &&
-                popularTv
-                  .slice(0, 10)
-                  .map((movie) => (
-                    <MovieItem
-                      fetchMovieDetails={fetchMovieDetails}
-                      key={movie.id}
-                      movie={movie}
-                      openPopup={openPopup}
-                    />
-                  ))}
-            </div>
-          </section>
-        </div>
+              >
+                TV Shows
+              </h2>
+              <div className="flex mt-5 overflow-x-auto">
+                {popularTv &&
+                  popularTv
+                    .slice(0, 10)
+                    .map((movie) => (
+                      <MovieItem
+                        fetchMovieDetails={fetchMovieDetails}
+                        key={movie.id}
+                        movie={movie}
+                        openPopup={openPopup}
+                      />
+                    ))}
+              </div>
+            </section>
+          </motion.div>
+        </AnimatePresence>
       )}
     </div>
   );

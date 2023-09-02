@@ -1,5 +1,6 @@
 import React from "react";
 import { IoMdMenu } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -8,10 +9,10 @@ const NavBar = () => {
         <h1 className="text-secondary-color">CineMe</h1>
         <button className="hamburger"><IoMdMenu color="white" size={35}/></button>
         <ul className="text-text-color nav-ul nav-ul flex">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Movies</a></li>
-            <li><a href="#">Series</a></li>
-            <li><a href="#">Tv Shows</a></li>
+            <li><Link to={'/'}>Home</Link></li>
+            <li><Link to={'/movies'}>Movies</Link></li>
+            <li><Link to={'/series'}>Series</Link></li>
+            <li><Link to={'/shows'}>Tv Shows</Link></li>
         </ul>
       </div>
     </nav>

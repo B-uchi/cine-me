@@ -6,7 +6,7 @@ const MovieItem = (props) => {
   return (
     <div
       key={props.movie.id}
-      className="mr-4 cursor-pointer w-32 h-fit sm:min-h-fit sm:w-44 flex-none overflow-clip rounded-md border-2 border-transparent bg-primary-color transition-all duration-300 ease-linear hover:border-3 hover:border-purple text-text-color mb-4"
+      className="mr-4 cursor-pointer w-32 h-fit sm:min-h-fit sm:w-44 flex-none overflow-clip rounded-md border-2 border-transparent bg-primary-color transition-all duration-300 ease-linear hover:border-3 hover:border-purple text-text-color mb-4 mx-auto"
       onClick={()=>{props.fetchMovieDetails(props.movie.id); props.setLoading? props.setLoading(true) : ""; props.openPopup? props.openPopup(props.movie.id):""}}
     >
       <div className="item-img-container flex relative flex-col justify-center">

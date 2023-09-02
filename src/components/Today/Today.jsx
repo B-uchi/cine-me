@@ -50,7 +50,7 @@ const Today = () => {
       .all([getPopularMovies])
       .then(
         axios.spread((...result) => {
-          setSelected(result[0].data.results[1]);
+          setSelected(result[0].data.results[2]);
           setLoading(false);
         })
       )
@@ -70,16 +70,11 @@ const Today = () => {
         ""
       ) : selected ? (
         <div className="today">
-          <AnimatePresence>
-            <motion.img
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: "100%" }}
-              exit={{ opacity: 0 }}
+            <img
               src={`https://image.tmdb.org/t/p/original${selected.backdrop_path}`}
               alt=""
               className="relative w-full sm:object-cover h-fit sm:h-[92vh] "
             />
-          </AnimatePresence>
           <div className="details relative flex p-5 rounded bg-primary-color flex-col sm:w-[600px]  pt-34sm:pt-20 overlayy sm:bottom-10 sm:absolute sm:left-10">
             <h2 className="sm:text-3xl text-xl flex items-center text-text-color font-bold">
               {selected.original_title} ({selected.release_date.slice(0, 4)})
