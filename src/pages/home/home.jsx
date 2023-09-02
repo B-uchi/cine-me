@@ -4,7 +4,7 @@ import axios from "axios";
 import MovieItem from "../../components/movieItem";
 import Details from "../../components/details/Details";
 let API_KEY = import.meta.env.VITE_API_KEY;
-import spinner from "./spinner.gif";
+import spinner from "../../assets/spinner.gif";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);

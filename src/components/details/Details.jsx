@@ -5,6 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 import MovieItem from "../movieItem";
 let API_KEY = import.meta.env.VITE_API_KEY;
 import { motion, AnimatePresence } from "framer-motion";
+import spinner from "../../assets/spinner.gif";
 
 const Details = (props) => {
   const [hasFetch, setHasFetch] = useState(false);
@@ -111,7 +112,7 @@ const Details = (props) => {
               </div>
             </div>
           ) : (
-            ""
+            <img className="mx-auto my-56" src={spinner} alt="" />
           )
         ) : (
           <div className="">
