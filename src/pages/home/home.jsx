@@ -16,15 +16,18 @@ const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const openPopup = (id) => {
-    window.idd = id
+    window.idd = id;
     setShowPopup(true);
   };
-  
+
   const closePopup = () => {
     setShowPopup(false);
   };
 
-  
+  const fetchMovieDetails = (id) => {
+    // Function to satisfy logic
+  };
+
   useEffect(() => {
     const popularMoviesRequest = {
       method: "GET",
@@ -127,13 +130,16 @@ const Home = () => {
             </h2>
             <div className="flex mt-5 overflow-x-auto">
               {popularMovies &&
-                popularMovies.slice(0, 10).map((movie) => (
+                popularMovies
+                  .slice(0, 10)
+                  .map((movie) => (
                     <MovieItem
                       key={movie.id}
                       movie={movie}
                       openPopup={openPopup}
+                      fetchMovieDetails={fetchMovieDetails}
                     />
-                ))}
+                  ))}
             </div>
           </section>
 
@@ -149,7 +155,14 @@ const Home = () => {
               {topRatedMovies &&
                 topRatedMovies
                   .slice(0, 10)
-                  .map((movie) => <MovieItem key={movie.id} movie={movie} openPopup={openPopup}/>)}
+                  .map((movie) => (
+                    <MovieItem
+                      fetchMovieDetails={fetchMovieDetails}
+                      key={movie.id}
+                      movie={movie}
+                      openPopup={openPopup}
+                    />
+                  ))}
             </div>
           </section>
 
@@ -165,7 +178,14 @@ const Home = () => {
               {upcomingMovies &&
                 upcomingMovies
                   .slice(0, 10)
-                  .map((movie) => <MovieItem key={movie.id} movie={movie} openPopup={openPopup}/>)}
+                  .map((movie) => (
+                    <MovieItem
+                      fetchMovieDetails={fetchMovieDetails}
+                      key={movie.id}
+                      movie={movie}
+                      openPopup={openPopup}
+                    />
+                  ))}
             </div>
           </section>
 
@@ -181,7 +201,14 @@ const Home = () => {
               {popularTv &&
                 popularTv
                   .slice(0, 10)
-                  .map((movie) => <MovieItem key={movie.id} movie={movie} openPopup={openPopup}/>)}
+                  .map((movie) => (
+                    <MovieItem
+                      fetchMovieDetails={fetchMovieDetails}
+                      key={movie.id}
+                      movie={movie}
+                      openPopup={openPopup}
+                    />
+                  ))}
             </div>
           </section>
         </div>
