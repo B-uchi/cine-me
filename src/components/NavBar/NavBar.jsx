@@ -19,21 +19,15 @@ const NavBar = () => {
             <Link to={"/movies"}>Movies</Link>
           </li>
           <li>
-            <Link to={"/series"}>Series</Link>
-          </li>
-          <li>
             <Link to={"/shows"}>Tv Shows</Link>
           </li>
         </ul>
-        {showing? <div className="absolute nav-mobile left-5 right-10 mt-72 list-none p-1 bg-hover-color rounded flex-col flex justify-center items-center w-[90%]">
+        {showing? <div className="absolute nav-mobile left-5 right-10 mt-56 list-none p-1 bg-hover-color rounded flex-col flex justify-center items-center w-[90%]">
             <li>
               <Link to={"/"}>Home</Link>
             </li>
             <li>
               <Link to={"/movies"}>Movies</Link>
-            </li>
-            <li>
-              <Link to={"/series"}>Series</Link>
             </li>
             <li>
               <Link to={"/shows"}>Tv Shows</Link>

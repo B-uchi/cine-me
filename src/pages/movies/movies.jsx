@@ -95,11 +95,11 @@ const Movies = () => {
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: -1000, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="p-5"
+        className=""
       >
         <motion.h2
           className="font-bold text-sm sm:text-2xl bg-primary-color w-fit
-                p-3 text-text-color rounded"
+                p-3 mx-5 mt-5 text-text-color rounded"
         >
           Movies
         </motion.h2>
@@ -147,7 +147,7 @@ const Movies = () => {
                 />
                 {/* <div className="text-hover-color p-2"><GrSearch size={30}/></div> */}
               </div>
-              <div className="mt-12 w-[85%] mx-auto movie-container grid items-center">
+              <div className="mt-12 p-5 w-[85%] mx-auto movie-container grid items-center">
                 {moviesList &&
                   moviesList.map((movie) => (
                     <MovieItem
@@ -160,7 +160,7 @@ const Movies = () => {
                 {showPopup ? <Details id={idd} closePopup={closePopup} /> : ""}
               </div>
               {showBtn ? (
-                <div className="flex mt-10 justify-center space-x-5 w-[85%]">
+                <div className="flex mt-10 mb-5 justify-center space-x-5 w-[85%]">
                   <button
                     className="text-primary-color flex justify-between items-center font-bold text-xl bg-secondary-color p-3 px-7 rounded hover:scale-110 transition-all"
                     onClick={() => {

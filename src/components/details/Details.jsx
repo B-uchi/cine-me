@@ -72,6 +72,7 @@ const Details = (props) => {
       })
       .catch((error) => {
         console.error(error);
+        setisLoaded(true)
       });
   };
 
@@ -96,7 +97,7 @@ const Details = (props) => {
         </div>
         {loading ? (
           isLoaded ? (
-            <div className="bg-primary-color p-5 justify-center rounded-md">
+            <div className="bg-primary-color w-fit p-5 mx-auto mt-10 justify-center rounded-md">
               <p className="text-xl font-bold text-text-color">
                 Sorry an error occured. Please check your network...
               </p>
