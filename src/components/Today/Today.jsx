@@ -103,7 +103,7 @@ const Today = () => {
             </p>
             <div className="mt-3">
               <button
-                className="bg-secondary-color font-bold text-white text-lg p-2 rounded-lg hover:scale-105 transition-all"
+                className="bg-secondary-color text-white text-lg p-2 rounded-lg hover:scale-105 transition-all"
                 onClick={openPopup}
               >
                 Show More
