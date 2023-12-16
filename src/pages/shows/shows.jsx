@@ -121,7 +121,7 @@ const Shows = () => {
                   </div>
                 </div>
               ) : (
-                <img src={spinner} className="w-[200px]" alt="" />
+                <img src={spinner} className="w-[50px]" alt="" />
               )}
             </div>
           ) : (
