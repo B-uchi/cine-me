@@ -76,9 +76,10 @@ const Details = (props) => {
       });
   };
 
-  {
-    hasFetch ? "" : fetchMovieDetails();
+  if (!hasFetch) {
+    fetchMovieDetails();
   }
+
   return (
     <AnimatePresence>
       <motion.div
