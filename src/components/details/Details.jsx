@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { IoIosCloseCircle } from "react-icons/io";
-import { AiFillStar } from "react-icons/ai";
+import { IoClose } from "react-icons/io5";
+import { AiFillStar, AiFillPlayCircle } from "react-icons/ai";
+import { BsCalendar3, BsClock, BsGlobe } from "react-icons/bs";
 import MovieItem from "../movieItem";
-let API_KEY = import.meta.env.VITE_API_KEY;
 import { motion, AnimatePresence } from "framer-motion";
-import spinner from "../../assets/spinner.gif";
+let API_KEY = import.meta.env.VITE_API_KEY;
 
 const Details = (props) => {
   const [hasFetch, setHasFetch] = useState(false);
@@ -53,6 +53,7 @@ const Details = (props) => {
     );
     setHasFetch(true);
   };
+
   const getMovieSnapshots = (id) => {
     const snapshotRequest = {
       method: "GET",
@@ -72,7 +73,7 @@ const Details = (props) => {
       })
       .catch((error) => {
         console.error(error);
-        setisLoaded(true)
+        setisLoaded(true);
       });
   };
 
@@ -83,135 +84,218 @@ const Details = (props) => {
   return (
     <AnimatePresence>
       <motion.div
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: "92%" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed left-3 w-[95%] sm:w-full right-3 top-5 z-30 sm:mx-auto h-[95vh] overflow-y-scroll rounded-md border-primary-color bg-hover-color lg:top-5 lg:w-[90%] lg:border-[3px]"
+        className="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4"
+        onClick={props.closePopup}
       >
-        <div className="absolute left-0 z-20 flex w-full justify-end p-4">
-          <button onClick={() => props.closePopup()}>
-            <IoIosCloseCircle
-              size={"2rem"}
-              className=" hover:text-primaryDark text-white/50 hover:text-white/80"
-            />
-          </button>
-        </div>
-        {loading ? (
-          isLoaded ? (
-            <div className="bg-primary-color w-fit p-5 mx-auto mt-10 justify-center rounded-md">
-              <p className="text-xl font-bold text-text-color">
-                Sorry an error occured. Please check your network...
-              </p>
-              <div className="justify-center mt-8 flex items-center">
-                <button
-                  className="bg-secondary-color font-bold p-3 px-5 rounded-lg"
-                  onClick={() => {
-                    setRetry(!retry);
-                  }}
-                >
-                  Retry
-                </button>
-              </div>
-            </div>
-          ) : (
-            <img className="mx-auto my-56 w-[200px]" src={spinner} alt="" />
-          )
-        ) : (
-          <div className="">
-            <img
-              src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`}
-              alt=""
-              className="opacity-20 relative w-full h-fit sm:object-cover"
-            />
-            <div className="absolute top-10 left-0 right-0 w-full h-full">
-              <div className="flex flex-col items-center justify-center sm:flex-row w-full sm:space-x-24 space-y-3 ">
-                <div className="">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-                    alt=""
-                    className="w-2/3 mx-auto border-black border-4"
-                  />
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="modal-content w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={props.closePopup}
+            className="absolute top-4 right-4 z-20 w-10 h-10 bg-surface/80 backdrop-blur-sm rounded-full flex items-center justify-center border border-border/50 hover:bg-surface transition-colors"
+          >
+            <IoClose className="w-6 h-6 text-text" />
+          </motion.button>
+
+          {loading ? (
+            isLoaded ? (
+              <div className="flex items-center justify-center min-h-[400px] p-8">
+                <div className="text-center space-y-4">
+                  <p className="text-xl font-semibold text-text">
+                    Sorry, an error occurred. Please check your network...
+                  </p>
+                  <button
+                    className="btn-primary"
+                    onClick={() => {
+                      setRetry(!retry);
+                    }}
+                  >
+                    Retry
+                  </button>
                 </div>
-                <div className="details flex p-5 rounded bg-primary-color flex-col sm:w-[600px] w-[100%] pt-5">
-                  <h2 className="text-xl sm:text-3xl flex items-center text-text-color font-bold">
-                    <a
-                      className="underline"
-                      target="_blank"
-                      href={movieDetails.homepage}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center min-h-[400px]">
+                <div className="loading-spinner"></div>
+              </div>
+            )
+          ) : (
+            <div className="overflow-y-auto max-h-[90vh]">
+              {/* Hero Section */}
+              <div className="relative h-96">
+                <img
+                  src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`}
+                  alt={movieDetails.original_title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                
+                {/* Movie Info Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <div className="flex flex-col lg:flex-row gap-8 items-end">
+                    {/* Poster */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex-shrink-0"
                     >
-                      {movieDetails.original_title} (
-                      {movieDetails.release_date.slice(0, 4)})
-                    </a>
-                    <small className="text-accent-color text-sm ml-2">
-                      <AiFillStar className="inline-block" />
-                      {movieDetails.vote_average}/10
-                    </small>
-                  </h2>
-                  <small className="text-accent-color">
-                    Release Date: {movieDetails.release_date}
-                  </small>
-                  <div className="flex space-x-1 sm:space-x-3 overflow-x-auto mt-1">
-                    {movieDetails.genres &&
-                      movieDetails.genres.map((genre) => (
-                        <div
-                          key={genre.id}
-                          className="px-3 bg-text-color rounded-full border-hover-color text-[12px] sm:text-xl border-2"
-                        >
-                          {genre.name}
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+                        alt={movieDetails.original_title}
+                        className="w-48 h-72 object-cover rounded-xl shadow-2xl"
+                      />
+                    </motion.div>
+
+                    {/* Info */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="flex-1 space-y-4"
+                    >
+                      <div className="space-y-2">
+                        <h1 className="text-3xl sm:text-4xl font-bold text-text">
+                          {movieDetails.original_title}
+                        </h1>
+                        <div className="flex items-center space-x-6 text-text-secondary">
+                          <div className="flex items-center space-x-2">
+                            <AiFillStar className="text-yellow-400" />
+                            <span className="font-semibold">{movieDetails.vote_average}/10</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <BsCalendar3 />
+                            <span>{movieDetails.release_date}</span>
+                          </div>
+                          {movieDetails.runtime && (
+                            <div className="flex items-center space-x-2">
+                              <BsClock />
+                              <span>{movieDetails.runtime} min</span>
+                            </div>
+                          )}
                         </div>
-                      ))}
+                      </div>
+
+                      {/* Genres */}
+                      {movieDetails.genres && (
+                        <div className="flex flex-wrap gap-2">
+                          {movieDetails.genres.map((genre) => (
+                            <span key={genre.id} className="genre-tag">
+                              {genre.name}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-wrap gap-4">
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="btn-primary flex items-center space-x-2"
+                        >
+                          <AiFillPlayCircle />
+                          <span>Watch Trailer</span>
+                        </motion.button>
+                        
+                        {movieDetails.homepage && (
+                          <motion.a
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            href={movieDetails.homepage}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-secondary flex items-center space-x-2"
+                          >
+                            <BsGlobe />
+                            <span>Official Site</span>
+                          </motion.a>
+                        )}
+                      </div>
+                    </motion.div>
                   </div>
-                  <p className="text-hover-color font-bold mt-5">Overview: </p>
-                  <p className="text-text-color overflow-ellipsis text-sm">
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-8 space-y-8">
+                {/* Overview */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="space-y-4"
+                >
+                  <h2 className="section-title">Overview</h2>
+                  <p className="text-text-secondary text-lg leading-relaxed">
                     {movieDetails.overview}
                   </p>
-                </div>
-              </div>
-              <div className="mt-2 p-3 sm:mt-14 sm:p-10">
-                <h2
-                  className="font-bold text-sm sm:text-xl bg-primary-color w-fit
-                p-3 text-text-color rounded"
-                >
-                  Movie Shots:
-                </h2>
-                <div className="flex mt-6 space-x-7 overflow-x-auto">
-                  {snapshots.length > 0 ? (
-                    snapshots.map((shot, index) => (
-                      <img
-                        src={`https://image.tmdb.org/t/p/original${shot.file_path}`}
-                        key={index}
-                        className="h-32 rounded-md md:h-40 lg:h-52"
-                      />
-                    ))
-                  ) : (
-                    <p className="text-xl">
-                      Sorry none available at the moment...
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="mt-2 p-3 sm:mt-2 sm:p-10">
-                <h2
-                  className="font-bold text-sm sm:text-xl bg-primary-color w-fit
-                p-3 text-text-color rounded"
-                >
-                  You Might Also Like:{" "}
-                </h2>
-                <div className="flex mt-4 space-x-7 overflow-x-auto">
-                  {movieRecommendations &&
-                    movieRecommendations.map((movie) => (
-                      <MovieItem
-                        key={movie.id}
-                        movie={movie}
-                        setLoading={setLoading}
-                        fetchMovieDetails={fetchMovieDetails}
-                      />
-                    ))}
-                </div>
+                </motion.div>
+
+                {/* Movie Shots */}
+                {snapshots.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="space-y-4"
+                  >
+                    <h2 className="section-title">Movie Shots</h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                      {snapshots.map((shot, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.4 + index * 0.1 }}
+                          className="aspect-video overflow-hidden rounded-lg"
+                        >
+                          <img
+                            src={`https://image.tmdb.org/t/p/w500${shot.file_path}`}
+                            alt={`Movie shot ${index + 1}`}
+                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Recommendations */}
+                {movieRecommendations && movieRecommendations.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="space-y-4"
+                  >
+                    <h2 className="section-title">You Might Also Like</h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                      {movieRecommendations.slice(0, 10).map((movie) => (
+                        <MovieItem
+                          key={movie.id}
+                          movie={movie}
+                          openPopup={props.openPopup}
+                          fetchMovieDetails={props.fetchMovieDetails}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );

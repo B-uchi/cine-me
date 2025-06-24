@@ -6,14 +6,16 @@ import Shows from "./pages/shows/shows";
 
 function App() {
   return (
-    <div className="main">
+    <div className="min-h-screen bg-background">
       <Router>
         <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/movies" element={<Movies />}/>
-          <Route path="/shows" element={<Shows />}/>
-        </Routes>
+        <main className="pt-16 sm:pt-20">
+          <Routes>
+            <Route path="/" element={<Home />}/>
+            <Route path="/movies" element={<Movies />}/>
+            <Route path="/shows" element={<Shows />}/>
+          </Routes>
+        </main>
       </Router>
     </div>
   );
