@@ -131,7 +131,7 @@ const Details = (props) => {
               </div>
             )
           ) : (
-            <div className="overflow-y-auto max-h-[90vh]">
+            <div className="overflow-y-auto thin-scrollbar max-h-[90vh]">
               {/* Hero Section */}
               <div className="relative h-96">
                 <img
